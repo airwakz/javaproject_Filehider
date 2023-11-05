@@ -45,6 +45,7 @@ public class FileHider extends JFrame {
 
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
+        otpverify=new JButton("Verify");
 
         loginPanel.add(new JLabel("Username:"));
         loginPanel.add(usernameField);
