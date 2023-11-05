@@ -1,7 +1,10 @@
+package service;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
 import java.sql.*;
+import service.SendOTPService;
+import service.GenerateOTP;
 
 public class FileHider extends JFrame {
 
@@ -80,6 +83,7 @@ public class FileHider extends JFrame {
         loginButton.addActionListener(e -> login());
         registerButton.addActionListener(e -> register());
         hideButton.addActionListener(e -> hideFile());
+        otpverify.addActionListener(e -> otp());
     }
 
     private void login() {
@@ -94,6 +98,13 @@ public class FileHider extends JFrame {
 
     }
     private void otp() {
+        GenerateOTP gen = new GenerateOTP();
+        String genOTP1= gen.getOTP();
+        System.out.println(genOTP1);
+        String email = useremailField.getText();
+        SendOTPService sen = new SendOTPService();
+        sen.sendOTP(email,genOTP1);
+
 
     }
     private void hideFile() {

@@ -13,7 +13,7 @@ public class SendOTPService {
         // Sender's email ID needs to be mentioned
         String from = "mohak.gupta.22cse@bmu.edu.in";
 
-        // Assuming you are sending email from through gmails smtp
+        // Assuming you are sending email from through  smtp
         String host = "smtp.gmail.com";
 
         // Get system properties
