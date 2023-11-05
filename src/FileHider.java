@@ -36,7 +36,7 @@ public class FileHider extends JFrame {
 
         // Login panel
         loginPanel = new JPanel();
-        loginPanel.setLayout(new GridLayout(2, 2));
+        loginPanel.setLayout(new GridLayout(7, 2));
 
         usernameField = new JTextField();
         passwordField = new JPasswordField();
