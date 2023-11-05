@@ -19,7 +19,7 @@ public class FileHider extends JFrame {
     private JButton hideButton;
 
     private Connection connection;
-
+    private String user;
     public FileHider() {
         super("File Hider");
 
@@ -47,7 +47,7 @@ public class FileHider extends JFrame {
         registerButton = new JButton("Register");
         otpverify=new JButton("Verify");
 
-        loginPanel.add(new JLabel("Username:"));
+        loginPanel.add(new JLabel("Useremail:"));
         loginPanel.add(usernameField);
         loginPanel.add(new JLabel("Password:"));
         loginPanel.add(passwordField);
@@ -88,10 +88,14 @@ public class FileHider extends JFrame {
     }
 
     private void register() {
-        // TODO: Implement register logic
-        // e.g. Create a new user account in the database
-    }
+        String username = usernameField.getText();
+        System.out.println(username);
+        String password=passwordField.getText();
 
+    }
+    private void otp() {
+
+    }
     private void hideFile() {
         // Fork a new thread to hide the file
         new Thread(() -> {
