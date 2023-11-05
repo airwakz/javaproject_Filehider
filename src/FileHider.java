@@ -6,7 +6,7 @@ import java.sql.*;
 public class FileHider extends JFrame {
 
     private JPanel loginPanel;
-    private JTextField usernameField;
+    private JTextField useremailField;
 
     private JPasswordField otpfield;
     private JPasswordField passwordField;
@@ -38,7 +38,7 @@ public class FileHider extends JFrame {
         loginPanel = new JPanel();
         loginPanel.setLayout(new GridLayout(7, 2));
 
-        usernameField = new JTextField();
+        useremailField = new JTextField();
         passwordField = new JPasswordField();
         otpfield=new JPasswordField();
         otpverify=new JButton();
@@ -48,7 +48,7 @@ public class FileHider extends JFrame {
         otpverify=new JButton("Verify");
 
         loginPanel.add(new JLabel("Useremail:"));
-        loginPanel.add(usernameField);
+        loginPanel.add(useremailField);
         loginPanel.add(new JLabel("Password:"));
         loginPanel.add(passwordField);
         loginPanel.add(new JLabel("OTP:"));
@@ -88,8 +88,8 @@ public class FileHider extends JFrame {
     }
 
     private void register() {
-        String username = usernameField.getText();
-        System.out.println(username);
+        String useremail = useremailField.getText();
+        System.out.println(useremail);
         String password=passwordField.getText();
 
     }
