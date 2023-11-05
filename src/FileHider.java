@@ -5,6 +5,11 @@ import java.io.*;
 import java.sql.*;
 import service.SendOTPService;
 import service.GenerateOTP;
+import dao.UserDAO;
+import model.User;
+import service.GenerateOTP;
+import service.SendOTPService;
+import service.UserService;
 
 public class FileHider extends JFrame {
 
@@ -99,11 +104,24 @@ public class FileHider extends JFrame {
     }
     private void otp() {
         GenerateOTP gen = new GenerateOTP();
-        String genOTP1= gen.getOTP();
+        String genOTP1 = GenerateOTP.getOTP();
         System.out.println(genOTP1);
         String email = useremailField.getText();
         SendOTPService sen = new SendOTPService();
-        sen.sendOTP(email,genOTP1);
+
+        String genOTP2 = genOTP1;
+        SendOTPService.sendOTP(email, genOTP1);
+        if(genOTP2.equals(genOTP1)) {
+            User user = new User(email);
+            int response = UserService.saveUser(user);
+            switch (response) {
+                case 0 -> System.out.println("User registered");
+                case 1 -> System.out.println("User already exists");
+            }
+        } else {
+            System.out.println("Wrong OTP");
+        }
+
 
 
     }
