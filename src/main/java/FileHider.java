@@ -21,6 +21,7 @@ public class FileHider extends JFrame {
     private JButton loginButton;
     private JButton registerButton;
     private JButton otpverify;
+    private JButton getotp;
 
     private JPanel filePanel;
     private JTextField filePathField;
@@ -50,11 +51,12 @@ public class FileHider extends JFrame {
         passwordField = new JPasswordField();
         otpfield=new JPasswordField();
         otpverify=new JButton();
+        getotp=new JButton();
 
         loginButton = new JButton("Login");
         registerButton = new JButton("Register");
         otpverify=new JButton("Verify");
-
+        getotp=new JButton("Get OTP");
         loginPanel.add(new JLabel("Useremail:"));
         loginPanel.add(useremailField);
         loginPanel.add(new JLabel("Password:"));
@@ -62,6 +64,7 @@ public class FileHider extends JFrame {
         loginPanel.add(new JLabel("OTP:"));
         loginPanel.add(otpfield);
         loginPanel.add(otpverify);
+        loginPanel.add(getotp);
         loginPanel.add(loginButton);
         loginPanel.add(registerButton);
 
@@ -88,7 +91,7 @@ public class FileHider extends JFrame {
         loginButton.addActionListener(e -> login());
         registerButton.addActionListener(e -> register());
         hideButton.addActionListener(e -> hideFile());
-        otpverify.addActionListener(e -> otp());
+        getotp.addActionListener(e -> otp());
     }
 
     private void login() {
@@ -140,6 +143,8 @@ public class FileHider extends JFrame {
     }
 
     public static void main(String[] args) {
-        new FileHider();
+
+        FileHider in = new FileHider();
+
     }
 }
