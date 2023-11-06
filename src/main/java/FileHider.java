@@ -2,6 +2,7 @@ package service;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.*;
 import java.sql.*;
 import service.SendOTPService;
 import service.GenerateOTP;
@@ -29,6 +30,7 @@ public class FileHider extends JFrame {
 
     private Connection connection;
     private String user;
+    private String otpv;
     private String genOTP1;
     public FileHider() {
         super("File Hider");
@@ -90,10 +92,21 @@ public class FileHider extends JFrame {
 
         // Add action listeners
         loginButton.addActionListener(e -> login());
-        registerButton.addActionListener(e -> register());
+        registerButton.addActionListener(e -> {
+            // Check if the user has verified the code
+            if (otpv != "1") {
+                System.out.println("Please verify the code first");
+                return;
+            }
+            else{register();}
+
+            // TODO: Implement register logic
+            // e.g. Insert the user's details into the database
+        });
         hideButton.addActionListener(e -> hideFile());
         getotp.addActionListener(e -> otp());
         otpverify.addActionListener(e -> verifyotp());
+
     }
 
     private void login() {
@@ -105,6 +118,26 @@ public class FileHider extends JFrame {
         String useremail = useremailField.getText();
         System.out.println(useremail);
         String password=passwordField.getText();
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/filehide?useSSL=false", "root", "root");
+            System.out.println("Connection Established");
+            PreparedStatement pstmt =null;
+            String query = "Insert into users(password,email)"+"VALUES(?,?)";
+            pstmt = connection.prepareStatement(query);
+            pstmt.setString(1,password);
+            pstmt.setString(2,useremail);
+            int status = pstmt.executeUpdate();
+            if(status >0){
+                System.out.println("Record is inserted");
+
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Connection Failed");
+        }
+
+
 
     }
     private void otp() {
@@ -116,8 +149,10 @@ public class FileHider extends JFrame {
         SendOTPService.sendOTP(email, genOTP1);
     }
     private void verifyotp(){
+        otpv = "0";
         String userEnteredOTP = otpfield.getText();
         if (genOTP1.equals(userEnteredOTP)) {
+            otpv="1";
             System.out.println("OTP Valid");
         } else {
             System.out.println("OTP Invalid");
