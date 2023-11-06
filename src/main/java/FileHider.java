@@ -29,6 +29,7 @@ public class FileHider extends JFrame {
 
     private Connection connection;
     private String user;
+    private String genOTP1;
     public FileHider() {
         super("File Hider");
 
@@ -92,6 +93,7 @@ public class FileHider extends JFrame {
         registerButton.addActionListener(e -> register());
         hideButton.addActionListener(e -> hideFile());
         getotp.addActionListener(e -> otp());
+        otpverify.addActionListener(e -> verifyotp());
     }
 
     private void login() {
@@ -107,15 +109,19 @@ public class FileHider extends JFrame {
     }
     private void otp() {
         GenerateOTP gen = new GenerateOTP();
-        String genOTP1 = GenerateOTP.getOTP();
+        genOTP1 = GenerateOTP.getOTP();
         System.out.println(genOTP1);
         String email = useremailField.getText();
         SendOTPService sen = new SendOTPService();
-
-        String genOTP2 = genOTP1;
         SendOTPService.sendOTP(email, genOTP1);
-
-
+    }
+    private void verifyotp(){
+        String userEnteredOTP = otpfield.getText();
+        if (genOTP1.equals(userEnteredOTP)) {
+            System.out.println("OTP Valid");
+        } else {
+            System.out.println("OTP Invalid");
+        }
 
     }
     private void hideFile() {
